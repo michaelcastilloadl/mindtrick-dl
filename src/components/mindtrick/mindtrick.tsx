@@ -11,7 +11,7 @@ export class MyComponent {
   render() {
     return (
       <p>
-        My name is {this.name}
+        My name is {this.name} ccc
       </p>
     );
   }
