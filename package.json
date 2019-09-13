@@ -1,0 +1,22 @@
+{
+  "name": "mindtrick-dl",
+  "version": "1.0.0",
+  "description": "Our First Web Component with StencilJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelcastilloadl/mindtrick-dl.git"
+  },
+  "author": "DataLake Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelcastilloadl/mindtrick-dl/issues"
+  },
+  "homepage": "https://github.com/michaelcastilloadl/mindtrick-dl#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
