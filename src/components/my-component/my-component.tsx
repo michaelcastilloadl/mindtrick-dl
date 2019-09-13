@@ -1,5 +1,6 @@
 import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { formatDate } from '../../utils/utils';
+import { format } from 'moment';
 
 @Component({
   tag: 'my-component',
@@ -8,25 +9,25 @@ import { format } from '../../utils/utils';
 })
 export class MyComponent {
   /**
-   * The first name
+   * year
    */
-  @Prop() first: string;
+  @Prop() year: string;
 
   /**
-   * The middle name
+   * month
    */
-  @Prop() middle: string;
+  @Prop() month: string;
 
   /**
-   * The last name
+   * day
    */
-  @Prop() last: string;
+  @Prop() day: string;
 
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
+  private getDate(): string {
+    return formatDate(this.year, this.month, this.day);
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return <div>Hello, World! This Date {this.getDate()}</div>;
   }
 }

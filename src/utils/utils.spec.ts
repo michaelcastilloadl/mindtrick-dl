@@ -1,20 +1,20 @@
-import { format } from './utils';
+import { formatDate } from './utils';
 
-describe('format', () => {
+describe('formatDate', () => {
   it('returns empty string for no names defined', () => {
-    expect(format(undefined, undefined, undefined)).toEqual('');
+    expect(formatDate(undefined, undefined, undefined)).toEqual('');
   });
 
   it('formats just first names', () => {
-    expect(format('Joseph', undefined, undefined)).toEqual('Joseph');
+    expect(formatDate('Joseph', undefined, undefined)).toEqual('Joseph');
   });
 
   it('formats first and last names', () => {
-    expect(format('Joseph', undefined, 'Publique')).toEqual('Joseph Publique');
+    expect(formatDate('Joseph', undefined, 'Publique')).toEqual('Joseph Publique');
   });
 
   it('formats first, middle and last names', () => {
-    expect(format('Joseph', 'Quincy', 'Publique')).toEqual(
+    expect(formatDate('Joseph', 'Quincy', 'Publique')).toEqual(
       'Joseph Quincy Publique'
     );
   });

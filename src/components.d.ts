@@ -9,34 +9,24 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MindtrickDl {
-    'first': string;
-    'last': string;
-  }
   interface MyComponent {
     /**
-    * The first name
+    * day
     */
-    'first': string;
+    'day': string;
     /**
-    * The last name
+    * month
     */
-    'last': string;
+    'month': string;
     /**
-    * The middle name
+    * year
     */
-    'middle': string;
+    'year': string;
   }
 }
 
 declare global {
 
-
-  interface HTMLMindtrickDlElement extends Components.MindtrickDl, HTMLStencilElement {}
-  var HTMLMindtrickDlElement: {
-    prototype: HTMLMindtrickDlElement;
-    new (): HTMLMindtrickDlElement;
-  };
 
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
@@ -44,33 +34,27 @@ declare global {
     new (): HTMLMyComponentElement;
   };
   interface HTMLElementTagNameMap {
-    'mindtrick-dl': HTMLMindtrickDlElement;
     'my-component': HTMLMyComponentElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MindtrickDl extends JSXBase.HTMLAttributes<HTMLMindtrickDlElement> {
-    'first'?: string;
-    'last'?: string;
-  }
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
     /**
-    * The first name
+    * day
     */
-    'first'?: string;
+    'day'?: string;
     /**
-    * The last name
+    * month
     */
-    'last'?: string;
+    'month'?: string;
     /**
-    * The middle name
+    * year
     */
-    'middle'?: string;
+    'year'?: string;
   }
 
   interface IntrinsicElements {
-    'mindtrick-dl': MindtrickDl;
     'my-component': MyComponent;
   }
 }

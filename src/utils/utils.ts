@@ -1,8 +1,8 @@
 
-export function format(first: string, middle: string, last: string): string {
+export function formatDate(year: string, month: string, day: string): string {
   return (
-    (first || '') +
-    (middle ? ` ${middle}` : '') +
-    (last ? ` ${last}` : '')
+    (year || '') +
+    (month ? ` ${month}` : '') +
+    (day ? ` ${day}` : '')
   );
 }
