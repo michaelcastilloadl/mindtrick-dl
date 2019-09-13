@@ -1,4 +1,4 @@
-import { Component } from '@stencil/core';
+import { Component, Prop } from '@stencil/core';
 
 
 @Component({
@@ -7,13 +7,14 @@ import { Component } from '@stencil/core';
 })
 export class MindtrickDl {
 
-    
+    @Prop() first: string;
+    @Prop() last: string;
 
     render() {
         return (
-            <div>
-                <p>Hello MindtrickDl!</p>
-            </div>
+            <p>
+                Hello, my name is {this.first} {this.last}
+            </p>
         );
     }
 }
