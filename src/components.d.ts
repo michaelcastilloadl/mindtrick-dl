@@ -10,18 +10,14 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface MyComponent {
-    /**
-    * day
-    */
-    'day': string;
-    /**
-    * month
-    */
-    'month': string;
-    /**
-    * year
-    */
-    'year': string;
+    'date_max': string;
+    'date_min': string;
+    'locale': string;
+    'onNext': () => Promise<void>;
+    'onPrev': () => Promise<void>;
+    'output_format': string;
+    'range': string;
+    'weekdayshort': string[];
   }
 }
 
@@ -40,18 +36,13 @@ declare global {
 
 declare namespace LocalJSX {
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * day
-    */
-    'day'?: string;
-    /**
-    * month
-    */
-    'month'?: string;
-    /**
-    * year
-    */
-    'year'?: string;
+    'date_max'?: string;
+    'date_min'?: string;
+    'locale'?: string;
+    'onMonthChangePast'?: (event: CustomEvent<any>) => void;
+    'output_format'?: string;
+    'range'?: string;
+    'weekdayshort'?: string[];
   }
 
   interface IntrinsicElements {
