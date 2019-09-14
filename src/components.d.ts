@@ -12,6 +12,7 @@ export namespace Components {
   interface MyComponent {
     'date_max': string;
     'date_min': string;
+    'init_date': string;
     'locale': string;
     'month_table': boolean;
     'onNext': () => Promise<void>;
@@ -39,6 +40,7 @@ declare namespace LocalJSX {
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
     'date_max'?: string;
     'date_min'?: string;
+    'init_date'?: string;
     'locale'?: string;
     'month_table'?: boolean;
     'output_format'?: string;

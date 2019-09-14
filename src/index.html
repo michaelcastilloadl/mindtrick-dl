@@ -10,8 +10,34 @@
 
 </head>
 <body>
-<!-- <div>
-  <my-component 
+<table>
+  <tr>
+    <td>
+        <my-component 
+        date_min="1991-04-20" 
+        date_max="2020-12-31" 
+        range="False" 
+        output_format="L" 
+        month_table="true"
+        year_table="true"
+        locale="es">
+      </my-component>
+    </td>
+    <td>
+        <my-component 
+        date_min="1991-04-20" 
+        date_max="2020-12-31" 
+        range="False" 
+        output_format="L" 
+        month_table="false"
+        year_table="false"
+        init_date="2016-02-13"
+        locale="es">
+      </my-component>
+    </td>
+  </tr>
+  </table> 
+  <!-- <my-component 
     date_min="1991-04-20" 
     date_max="2020-12-31" 
     range="False" 
@@ -20,7 +46,7 @@
     year_table="true"
     locale="es">
   </my-component>
-</div> -->
+</div>
 <div>
   <my-component 
     date_min="1991-04-20" 
@@ -29,9 +55,10 @@
     output_format="L" 
     month_table="false"
     year_table="false"
+    init_date="2016-02-13"
     locale="es">
   </my-component>
-</div>
+</div> -->
 
 </body>
 </html>

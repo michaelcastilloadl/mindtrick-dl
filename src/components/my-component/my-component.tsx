@@ -30,6 +30,7 @@ export class MyComponent {
   @Prop() weekdayshort: string[];
   @Prop() month_table: boolean;
   @Prop() year_table: boolean;
+  @Prop() init_date: string;
   // columnHeaders: MonthViewDay[];
   formatNombres= {
     months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
@@ -42,7 +43,7 @@ export class MyComponent {
   state = {
     showCalendarTable: true,
     showMonthTable: this.month_table,
-    dateObject: moment(),
+    dateObject: moment(this.init_date),
     allmonths: moment.months(),
     showYearNav: this.year_table,
     selectedDay: null
