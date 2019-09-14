@@ -1,6 +1,6 @@
-import { Component, Prop, h, State, Method, Event, Watch } from '@stencil/core';
+import { Component, Prop, h, State, Method, Event, Watch, Listen } from '@stencil/core';
 import { formatDate } from '../../utils/utils';
-import { MonthViewDay } from '../../model/mindtrick-dl'
+// import { MonthViewDay } from '../../model/mindtrick-dl'
 // import 'moment';
 import moment, { Moment } from 'moment';
 
@@ -28,26 +28,28 @@ export class MyComponent {
   /* Idioma */
   @Prop() locale: string;
   @Prop() weekdayshort: string[];
-  columnHeaders: MonthViewDay[];
+  @Prop() month_table: boolean;
+  @Prop() year_table: boolean;
+  // columnHeaders: MonthViewDay[];
+  formatNombres= {
+    months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+    monthsShort: 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sept_Oct_Nov_Dec'.split('_'),
+    weekdays: 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado'.split('_'),
+    weekdaysShort: 'Dom_Lun_Mar_Mier_Jue_Vier_Sab'.split('_'),
+    weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sa'.split('_')
+  };
   @State()
   state = {
     showCalendarTable: true,
-    showMonthTable: false,
+    showMonthTable: this.month_table,
     dateObject: moment(),
     allmonths: moment.months(),
-    showYearNav: false,
+    showYearNav: this.year_table,
     selectedDay: null
-  };
-  // @State() showCalendarTable: true;
-  // @State() showMonthTable: false;
-  // @State() dateObject: Moment;
-  // @State() allmonths: moment().months();
-  // @State() showYearNav: false;
-  // @State() selectedDay: null;
-  
+  }; 
 
-  @Event()
-  public monthChangePast: EventEmitter;
+  // @Event()
+  // public monthChangePast: EventEmitter;
   
   daysInMonth = () => {
     return this.state.dateObject.daysInMonth();
@@ -66,24 +68,33 @@ export class MyComponent {
     return firstDay;
   };
 
-  @Watch('this.state')
+  // @Watch('this.state')
+  @Listen('this.state.dateObject')
   month = () => {
+    this.state.dateObject.locale('es', this.formatNombres);
     return this.state.dateObject.format("MMMM");
   };
   
   // @State()
   showMonth = (e, month) => {
     // this.setState({
+      console.log("Estado Menu Mes:" ,this.state.showMonthTable);
       this.state.showMonthTable = !this.state.showMonthTable;
       this.state.showCalendarTable = !this.state.showCalendarTable;
+      console.log("Estado Menu Mes:" ,this.state.showMonthTable);
     // });
   };
   setMonth = month => {
+    console.log(month)
+    this.state.dateObject.locale('es', this.formatNombres);
     let monthNo = this.state.allmonths.indexOf(month);
+    console.log(monthNo)
     let dateObject = Object.assign({}, this.state.dateObject);
+    console.log(dateObject)
     dateObject = moment(dateObject).set("month", monthNo);
+    console.log(dateObject)
     // this.setState({
-      dateObject= dateObject;
+      this.state.dateObject= dateObject;
       this.state.showMonthTable= !this.state.showMonthTable;
       this.state.showCalendarTable= !this.state.showCalendarTable;
     // });
@@ -124,7 +135,7 @@ export class MyComponent {
       <table className="calendar-month">
         <thead>
           <tr>
-            <th colSpan="4">Select a Month</th>
+            <th colSpan="4">Escoge un mes</th>
           </tr>
         </thead>
         <tbody>{monthlist}</tbody>
@@ -133,13 +144,15 @@ export class MyComponent {
   };
   showYearEditor = () => {
     // this.setState({
-      this.state.showYearNav= true;
+      console.log("Estado Menu Año:", this.state.showYearNav)
+      this.state.showYearNav= !this.state.showYearNav;
       this.state.showCalendarTable= !this.state.showCalendarTable;
+      console.log("Estado Menu Año:", this.state.showYearNav)
     // });
   };
 
   // onPrev = () => {
-  @Method()
+  // @Method()
   onPrev(){
     let curr = "";
     if (this.state.showMonthTable == true) {
@@ -148,9 +161,12 @@ export class MyComponent {
       curr = "month";
     }
     // this.setState({
-      console.log("Before:" ,this.state.dateObject)
+      let cu_date  = this.state.dateObject;
+    console.log("Before:", cu_date.format('LLLL').toString());
       this.state.dateObject= this.state.dateObject.subtract(1, curr)
-      console.log("After:" ,this.state.dateObject)
+      // console.log("After:" ,this.state.dateObject)
+      cu_date  = this.state.dateObject;
+    console.log("After: ",cu_date.format('LLLL').toString())
     // });
 
     
@@ -165,7 +181,11 @@ export class MyComponent {
       curr = "month";
     }
     // this.setState({
-      this.state.dateObject= this.state.dateObject.add(1, curr)
+    let cu_date  = this.state.dateObject;
+    console.log("Before:", cu_date.format('LLLL').toString());
+      this.state.dateObject= this.state.dateObject.add(1, curr);
+    cu_date  = this.state.dateObject;
+    console.log("After: ",cu_date.format('LLLL').toString())
     // });
   };
   setYear = year => {
@@ -235,7 +255,7 @@ export class MyComponent {
       <table className="calendar-month">
         <thead>
           <tr>
-            <th colSpan="4">Select a Yeah</th>
+            <th colSpan="4">Escoge un año</th>
           </tr>
         </thead>
         <tbody>{yearlist}</tbody>
@@ -260,19 +280,14 @@ export class MyComponent {
   }
 
   private setFormat() {
-    moment.locale('es', {
-      months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
-      monthsShort: 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sept_Oct_Nov_Dec'.split('_'),
-      weekdays: 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado'.split('_'),
-      weekdaysShort: 'Dom_Lun_Mar_Mier_Jue_Vier_Sab'.split('_'),
-      weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sa'.split('_')
-    }
-    );
+    moment.locale('es', this.formatNombres);
   }
   onDayClick = (e, d) => {
   // onDayClick(event){
     this.state.selectedDay = d
-    console.log(this.state.dateObject.year(), this.state.dateObject.month()+1, this.state.selectedDay)
+    // console.log(this.state.dateObject.year(), this.state.dateObject.month()+1, this.state.selectedDay)
+    let updatedDate = moment([this.state.dateObject.year(), this.state.dateObject.month(), d]);
+    console.log(updatedDate.format('LLLL').toString())
     // console.log(event.target.data)
   };
   render() {
@@ -338,7 +353,8 @@ export class MyComponent {
             //   this.onPrev();
             // }}
             // onClick={(event: UIEvent) => this.onPrev(event)}
-            onClick={() => this.onPrev()}
+            // onClick={() => this.onPrev()}
+            onClick={this.onPrev.bind(this)}
             class="calendar-button button-prev"
           />
           {!this.state.showMonthTable && !this.state.showYearEditor && (

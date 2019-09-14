@@ -13,11 +13,12 @@ export namespace Components {
     'date_max': string;
     'date_min': string;
     'locale': string;
+    'month_table': boolean;
     'onNext': () => Promise<void>;
-    'onPrev': () => Promise<void>;
     'output_format': string;
     'range': string;
     'weekdayshort': string[];
+    'year_table': boolean;
   }
 }
 
@@ -39,10 +40,11 @@ declare namespace LocalJSX {
     'date_max'?: string;
     'date_min'?: string;
     'locale'?: string;
-    'onMonthChangePast'?: (event: CustomEvent<any>) => void;
+    'month_table'?: boolean;
     'output_format'?: string;
     'range'?: string;
     'weekdayshort'?: string[];
+    'year_table'?: boolean;
   }
 
   interface IntrinsicElements {
